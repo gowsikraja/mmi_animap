@@ -11,29 +11,47 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+While working in map with Live-Tracking, You may like to show marker moving animation. This package
+will help you to animate marker over MapMyIndia's Map.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This initial version will use to move marker icon with smooth animation.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+This package only support in MapMyIndia's map. Tested android and Ios
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+To initialize `MmiAnimarker` you need to pass `MapmyIndiaMapController` and `vsync`
 
 ```dart
-const like = 'sample';
+late MmiAnimarker mmiAnimarker;
+
+_onMapCreated(MapmyIndiaMapController controller) {
+  mmiAnimarker = MmiAnimarker(controller, this);
+}
 ```
 
-## Additional information
+```dart
+late Symbol carMarkerSymbol;
+String carMarker = 'carMarker';
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+_addCarMarker(LatLng cabLatLng) async {
+  var symbolOptions = SymbolOptions(
+    geometry: cabLatLng,
+    iconImage: carMarker,
+    iconSize: 0.8,
+  );
+  cabMarkerSymbol = await mmiAnimarker.addAnimarkerSymbol(
+      carMarker, AppImages.IMG_CAR_MARKER, symbolOptions);
+}
+```
+
+```dart
+ _animateCabIcon(LatLng currentLatLng) async {
+  if (cabMarkerSymbol != null)
+    await mmiAnimarker.animateMarker(currentLatLng, cabMarkerSymbol!);
+}
+```
