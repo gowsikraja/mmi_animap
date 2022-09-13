@@ -10,6 +10,7 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
+<h1>Marker animator</h1>
 
 While working in map with Live-Tracking, You may like to show marker moving animation. This package
 will help you to animate marker over MapMyIndia's Map.
@@ -21,6 +22,22 @@ This initial version will use to move marker icon with smooth animation.
 ## Getting started
 
 This package only support in MapMyIndia's map. Tested android and Ios
+
+## Installation
+<ol>
+<li>Add the latest version of package to your pubspec.yaml (and run `dart pub get`)</li>
+
+```yaml
+dependencies:
+  mmi_animap: ^0.0.1
+```
+
+<li>Import the package and use it in your Flutter App.</li>
+
+```dart
+import 'package:mmi_animap/mmi_animap.dart';
+```
+</ol>
 
 ## Usage
 
@@ -53,6 +70,14 @@ _addCarMarker(LatLng cabLatLng) async {
  _animateCabIcon(LatLng currentLatLng) async {
   if (cabMarkerSymbol != null)
     await mmiAnimarker.animateMarker(currentLatLng, cabMarkerSymbol!);
+}
+```
+
+```dart
+ @override
+void dispose() {
+  mmiAnimarker.dispose();
+  super.dispose();
 }
 ```
 ## Screenshot
