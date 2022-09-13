@@ -55,3 +55,6 @@ _addCarMarker(LatLng cabLatLng) async {
     await mmiAnimarker.animateMarker(currentLatLng, cabMarkerSymbol!);
 }
 ```
+## Screenshot
+
+<img src="https://user-images.githubusercontent.com/23701518/189908643-957c79f4-b8f2-4a1b-b99a-475b511b2b73.gif" alt="">

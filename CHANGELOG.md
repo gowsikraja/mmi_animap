@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+Marker Geo-Animation solution for MapMyIndia - initial release.

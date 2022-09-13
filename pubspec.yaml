@@ -1,7 +1,7 @@
 name: mmi_animap
-description: A new Flutter project.
+description: Marker Geo-Animation solution for MapMyIndia.
 version: 0.0.1
-homepage:
+homepage: https://github.com/gowsikraja/mmi_animap
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
