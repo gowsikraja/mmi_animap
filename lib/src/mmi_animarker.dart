@@ -33,10 +33,13 @@ class MmiAnimarker {
 
   animateMarker(LatLng newLatLng, Symbol markerSymbol,
       {bool focusTracking = true}) {
-    assert(oldLatLng != null);
+    if (oldLatLng == null) {
+      oldLatLng = newLatLng;
+      return;
+    }
     if (!isCarAnimating) {
-      controller =
-          AnimationController(vsync: vsync, duration: Duration(seconds: 3));
+      controller = AnimationController(
+          vsync: vsync, duration: const Duration(seconds: 3));
       var tween = Tween<double>(begin: 0, end: 1);
       animation = tween.animate(controller!);
 

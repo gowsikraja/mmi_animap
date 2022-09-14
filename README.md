@@ -29,7 +29,7 @@ This package only support in MapMyIndia's map. Tested android and Ios
 
 ```yaml
 dependencies:
-  mmi_animap: ^0.0.1
+  mmi_animap: ^0.0.2
 ```
 
 <li>Import the package and use it in your Flutter App.</li>
