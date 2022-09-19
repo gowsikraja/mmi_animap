@@ -1,6 +1,6 @@
 name: mmi_animap
 description: Marker Geo-Animation solution for MapMyIndia.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/gowsikraja/mmi_animap
 
 environment:

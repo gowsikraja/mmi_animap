@@ -1,15 +1,13 @@
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:mapmyindia_gl/mapmyindia_gl.dart';
 import 'dart:math' as math;
 
 class MmiAnimarker {
-  MapmyIndiaMapController mmiController;
+  MapmyIndiaMapController? mmiController;
   TickerProvider vsync;
   AnimationController? controller;
-  late Animation animation;
+  Animation? animation;
 
   MmiAnimarker(this.mmiController, this.vsync);
 
@@ -21,14 +19,14 @@ class MmiAnimarker {
   Future<void> addImageFromAsset(String imageName, String assetPath) async {
     final ByteData bytes = await rootBundle.load(assetPath);
     final Uint8List list = bytes.buffer.asUint8List();
-    return await mmiController.addImage(imageName, list);
+    return await mmiController?.addImage(imageName, list);
   }
 
-  Future<Symbol> addAnimarkerSymbol(
+  Future<Symbol?> addAnimarkerSymbol(
       String imageName, String assetPath, SymbolOptions symbolOptions) async {
     await addImageFromAsset(imageName, assetPath);
     oldLatLng = symbolOptions.geometry;
-    return await mmiController.addSymbol(symbolOptions);
+    return await mmiController?.addSymbol(symbolOptions);
   }
 
   animateMarker(LatLng newLatLng, Symbol markerSymbol,
@@ -43,7 +41,7 @@ class MmiAnimarker {
       var tween = Tween<double>(begin: 0, end: 1);
       animation = tween.animate(controller!);
 
-      animation.addStatusListener((status) {
+      animation?.addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           oldLatLng = newLatLng;
           isCarAnimating = false;
@@ -56,8 +54,8 @@ class MmiAnimarker {
       controller?.forward();
       var bearing = getBearing(oldLatLng!, newLatLng);
 
-      animation.addListener(() async {
-        var v = animation.value;
+      animation?.addListener(() async {
+        var v = animation?.value;
         var lng = v * newLatLng.longitude + (1 - v) * oldLatLng!.longitude;
         var lat = v * newLatLng.latitude + (1 - v) * oldLatLng!.latitude;
 
@@ -67,13 +65,13 @@ class MmiAnimarker {
           geometry: latLng,
           iconRotate: bearing,
         );
-        await mmiController.updateSymbol(markerSymbol, cabSymbolOptions);
+        await mmiController?.updateSymbol(markerSymbol, cabSymbolOptions);
       });
     }
   }
 
   Future<void> _moveCurrentLocation(LatLng latLng) async {
-    await mmiController.animateCamera(CameraUpdate.newLatLngZoom(latLng, 16));
+    await mmiController?.animateCamera(CameraUpdate.newLatLngZoom(latLng, 16));
   }
 
   static double getBearing(LatLng start, LatLng end) {
